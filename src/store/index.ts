@@ -1,7 +1,17 @@
-import { DashState, Quote, DashActionTypes } from './types';
+import { useState } from "react";
+import { createContainer } from "unstated-next";
 
-const initialState: DashState = {
-    quotes: [
+export interface Quote {
+    symbol: string,
+    open: number,
+    close: number,
+    lastPrice: number,
+    change: number,
+    changePercent: number
+}
+
+export const useStore = () => {
+    const tempDefault = [
         {
             symbol: "SPY",
             open: 200,
@@ -26,9 +36,11 @@ const initialState: DashState = {
             change: 20,
             changePercent: 10
         }
-    ]
-}
+    ];
 
-export default function reducer(state = initialState, action: DashActionTypes): DashState {
-    return state;
-}
+    const [quotes, setQuotes] = useState<Quote[]>(tempDefault);
+
+    return { quotes, setQuotes };
+};
+
+export const QuotesContainer = createContainer(useStore);

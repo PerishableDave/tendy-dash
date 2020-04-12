@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Quote } from '../store/types';
+import { Quote } from '../store';
 
 export interface TickerCardProps {
     quote: Quote
